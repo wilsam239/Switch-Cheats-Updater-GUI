@@ -1,4 +1,4 @@
-#include "MainApplication.hpp"
+#include <ui/MainApplication.hpp>
 
 DownloadCheatsLayout::DownloadCheatsLayout() : Layout::Layout()
 {

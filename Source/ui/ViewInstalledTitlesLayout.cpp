@@ -1,4 +1,4 @@
-#include <MainApplication.hpp>
+#include <ui/MainApplication.hpp>
 
 ViewInstalledTitlesLayout::ViewInstalledTitlesLayout() : Layout::Layout() {
 

@@ -33,13 +33,13 @@ include $(DEVKITPRO)/libnx/switch_rules
 
 APP_TITLE := Cheats Updater GUI
 APP_AUTHOR := Acta
-APP_VERSION := 0.0.1
+APP_VERSION := 0.0.2
 
 TARGET		:=	$(notdir $(CURDIR))
 BUILD		:=	build
 SOURCES		:=	Source Source/ui
 DATA		:=	data
-INCLUDES	:=	Include
+INCLUDES	:=	Include Include/ui
 #ROMFS	:=	romfs
 
 #---------------------------------------------------------------------------------
