@@ -3,9 +3,9 @@
 
 // Include Plutonium's main header
 #include <pu/Plutonium>
-#include <testLayout.hpp>
-#include <CustomLayout.hpp>
-#include <MainMenuLayout.hpp>
+#include <ui/ViewInstalledTitlesLayout.hpp>
+#include <ui/DownloadCheatsLayout.hpp>
+#include <ui/MainMenuLayout.hpp>
 
 // Define your application (can't instantiate base class, so need to make a derived one)
 class MainApplication : public pu::ui::Application
@@ -16,8 +16,8 @@ class MainApplication : public pu::ui::Application
 
         // We need to define this, and use it to initialize everything
         void OnLoad() override;
-        TestLayout::Ref &getTestLayout();
-        CustomLayout::Ref &getCustomLayout();
+        ViewInstalledTitlesLayout::Ref &getViewInstalledTitlesLayout();
+        DownloadCheatsLayout::Ref &getDownloadCheatsLayout();
         MainMenuLayout::Ref &getMainMenuLayout();
 
         void ReturnToMainMenu();
@@ -30,7 +30,7 @@ class MainApplication : public pu::ui::Application
     private:
 
         // Layout instance
-        CustomLayout::Ref layout;
-        TestLayout::Ref testLayout;
-        MainMenuLayout::Ref mainMenuLayout;
+        DownloadCheatsLayout::Ref downloadCheats;
+        ViewInstalledTitlesLayout::Ref viewInstalledTitles;
+        MainMenuLayout::Ref mainMenu;
 };

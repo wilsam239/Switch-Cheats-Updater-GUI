@@ -4,5 +4,6 @@ build/
 *.nrp
 *.nacp
 *.nro
+*.nso
 *.zip
 *.pfs0

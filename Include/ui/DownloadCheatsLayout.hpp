@@ -1,13 +1,13 @@
 #include <pu/Plutonium>
 
 // Define your main layout as a class inheriting from pu::Layout
-class CustomLayout : public pu::ui::Layout {
+class DownloadCheatsLayout : public pu::ui::Layout {
     public:
 
-        CustomLayout();
+        DownloadCheatsLayout();
 
         // Have ::Ref alias and ::New() static constructor
-        PU_SMART_CTOR(CustomLayout)
+        PU_SMART_CTOR(DownloadCheatsLayout)
 
     private:
 

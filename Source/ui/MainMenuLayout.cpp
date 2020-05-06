@@ -35,11 +35,27 @@ MainMenuLayout::MainMenuLayout() : Layout::Layout() {
 }
 
 void MainMenuLayout::downloadMenuItem_Click() {
-    global_app->LoadLayout(global_app->getTestLayout());
+    global_app->LoadLayout(global_app->getViewInstalledTitlesLayout());
 }
 
 void MainMenuLayout::deleteMenuItem_Click() {
-    global_app->LoadLayout(global_app->getCustomLayout());
+    int opt = global_app->CreateShowDialog("Are you sure?", "All cheat files found in the titles folder will be deleted.", { "Yes", "No"}, true); // (using latest option as cancel option)
+    if((opt == -1) || (opt == -2)) // -1 and -2 are similar, but if the user cancels manually -1 is set, other types or cancel should be -2.
+    {
+        global_app->CreateShowDialog("Cancelled","No cheat files were deleted.", { "Ok" }, true); // If we will ignore the option, it doesn't matter if this is true or false
+    }
+    else
+    {
+        switch(opt)
+        {
+            case 0: // "Yes" was selected
+                global_app->CreateShowDialog("Deleted", "N titles had their cheats deleted.", { "Ok" }, true); // Same here ^
+                break;
+            /*case 1: // "No" was selected
+                global_app->CreateShowDialog("Cancelled", "No cheat files were deleted.", { "OK" }, true); // And here ^
+                break;*/
+        }
+    }
 }
 
 void MainMenuLayout::viewInstalledMenuItem_Click() {

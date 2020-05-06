@@ -31,13 +31,13 @@ include $(DEVKITPRO)/libnx/switch_rules
 #     - <libnx folder>/default_icon.jpg
 #---------------------------------------------------------------------------------
 
-APP_TITLE := Switch Cheats Updater GUI
+APP_TITLE := Cheats Updater GUI
 APP_AUTHOR := Acta
 APP_VERSION := 0.0.1
 
 TARGET		:=	$(notdir $(CURDIR))
 BUILD		:=	build
-SOURCES		:=	Source
+SOURCES		:=	Source Source/ui
 DATA		:=	data
 INCLUDES	:=	Include
 #ROMFS	:=	romfs
