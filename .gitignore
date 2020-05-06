@@ -1,0 +1,8 @@
+build/
+.vscode/
+*.elf
+*.nrp
+*.nacp
+*.nro
+*.zip
+*.pfs0
