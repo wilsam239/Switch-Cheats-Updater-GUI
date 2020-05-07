@@ -76,3 +76,11 @@ void MainApplication::mainMenuInput(u64 down, u64 up, u64 held) {
 
     if(down & KEY_PLUS) this->CloseWithFadeOut();
 }
+
+void MainApplication::debugDialog(std::string err) {
+    global_app->CreateShowDialog("Debug", err, {"Ok"}, false);
+}
+
+void MainApplication::debugDialog(std::stringstream& err) {
+    global_app->CreateShowDialog("Debug", err.str(), {"Ok"}, false);
+}

@@ -6,6 +6,8 @@
 #include <ui/ViewInstalledTitlesLayout.hpp>
 #include <ui/DownloadCheatsLayout.hpp>
 #include <ui/MainMenuLayout.hpp>
+#include <titles/titles.hpp>
+#include <sstream>
 
 #define focus      pu::ui::Color::FromHex("#6E6E72")
 #define foreground pu::ui::Color::FromHex("#45454A")
@@ -33,6 +35,9 @@ class MainApplication : public pu::ui::Application
         void customInput(u64 down, u64 up, u64 held);
         void testInput(u64 down, u64 up, u64 held);
         void mainMenuInput(u64 down, u64 up, u64 held);
+
+        void debugDialog(std::string err);
+        void debugDialog(std::stringstream& err);
 
     private:
         /*pu::ui::elm::TextBlock::Ref timeText;

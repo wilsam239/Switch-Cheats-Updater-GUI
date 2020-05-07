@@ -1,4 +1,9 @@
 #include <pu/Plutonium>
+#include <download.hpp>
+
+#define RELEASE_URL "https://github.com/HamletDuFromage/switch-cheats-db/releases/tag/v1.0"
+#define ARCHIVE_URL "https://github.com/HamletDuFromage/switch-cheats-db/releases/download/v1.0/"
+#define VERSION_FILE "version.dat"
 
 // Define your main layout as a class inheriting from pu::Layout
 class DownloadCheatsLayout : public pu::ui::Layout {
@@ -7,7 +12,9 @@ class DownloadCheatsLayout : public pu::ui::Layout {
         DownloadCheatsLayout();
 
         // Have ::Ref alias and ::New() static constructor
-        PU_SMART_CTOR(DownloadCheatsLayout)
+        PU_SMART_CTOR(DownloadCheatsLayout);
+
+        int versionUpToDate();
 
     private:
 

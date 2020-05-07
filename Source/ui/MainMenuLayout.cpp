@@ -29,7 +29,12 @@ MainMenuLayout::MainMenuLayout() : Layout::Layout() {
 }
 
 void MainMenuLayout::downloadMenuItem_Click() {
-    global_app->LoadLayout(global_app->getViewInstalledTitlesLayout());
+    int upToDate = global_app->getDownloadCheatsLayout()->versionUpToDate();
+    if(upToDate == 1) {
+        global_app->CreateShowDialog("Already up to date!", "The current cheats revision is up to date, there is nothing to be done.", {"Ok"}, false);
+    } else if(upToDate == 0){
+        global_app->LoadLayout(global_app->getDownloadCheatsLayout());
+    }
 }
 
 void MainMenuLayout::deleteMenuItem_Click() {
@@ -53,5 +58,12 @@ void MainMenuLayout::deleteMenuItem_Click() {
 }
 
 void MainMenuLayout::viewInstalledMenuItem_Click() {
-    global_app->LoadLayout(global_app->getMainMenuLayout());
+    global_app->getViewInstalledTitlesLayout()->getInstalledTitlesNs();
+    
+    if(global_app->getViewInstalledTitlesLayout()->getTitlesCount() == 0) {
+        global_app->CreateShowDialog("No titles found.", "", {"Ok"}, false);
+    } else {
+        global_app->getViewInstalledTitlesLayout()->populateMenu();
+        global_app->LoadLayout(global_app->getViewInstalledTitlesLayout());
+    }
 }
