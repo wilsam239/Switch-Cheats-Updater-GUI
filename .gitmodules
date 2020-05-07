@@ -1,3 +1,3 @@
-[submodule "Plutonium"]
+[submodule "libs/Plutonium"]
 	path = libs/Plutonium
-	url = https://github.com/XorTroll/Plutonium
+	url = git@github.com:XorTroll/Plutonium.git
