@@ -1,5 +1,4 @@
-#ifndef TITLES_HPP
-#define TITLES_HPP
+#pragma once
 
 #define UPDATED_TITLES_PATH "/config/cheats-updater/updated.dat"
 
@@ -26,8 +25,6 @@ void outputUpdatedTitles();
 
 void printTitles(std::vector<Title> titles);
 
-//std::vector<Title> getInstalledTitlesNs();
+std::vector<Title> getInstalledTitlesNs();
 
-//std::string formatApplicationId(u64 ApplicationId);
-
-#endif
+std::string formatApplicationId(u64 ApplicationId);

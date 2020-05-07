@@ -1,7 +1,6 @@
-#include <iostream>
+#pragma once
 
-#ifndef TITLE
-#define TITLE
+#include <iostream>
 
 /* Defines the Title structure
     id: the title ID
@@ -21,4 +20,3 @@ struct Title {
     }
 };
 
-#endif

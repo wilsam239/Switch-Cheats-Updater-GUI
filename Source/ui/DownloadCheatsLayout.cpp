@@ -1,3 +1,4 @@
+#include <ui/DownloadCheatsLayout.hpp>
 #include <ui/MainApplication.hpp>
 
 extern MainApplication::Ref global_app;
@@ -32,6 +33,6 @@ int DownloadCheatsLayout::versionUpToDate() {
     } else {
         return 0;
     }
-    
+
 }
 

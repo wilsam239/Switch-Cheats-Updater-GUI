@@ -1,4 +1,4 @@
-#ifndef EXTRACT_HPP
+/*#ifndef EXTRACT_HPP
 #define EXTRACT_HPP
 
 #include <string>
@@ -19,8 +19,8 @@
 
 #include <unzipper.h>
 
-#include "title.h"
-#include "titles.hpp"
+#include "titles/title.h"
+#include "titles/titles.hpp"
 
 #define CONTENTS_PATH "contents/"
 #define TITLES_PATH "titles/"
@@ -41,7 +41,7 @@ int removeCheats(bool sxos);
 
 bool caselessCompare (const std::string& a, const std::string& b);
 
-static constexpr u32 MaxTitleCount = 64000;
+//static constexpr u32 MaxTitleCount = 64000;
 
 #endif
-
+*/

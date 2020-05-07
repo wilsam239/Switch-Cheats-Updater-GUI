@@ -1,5 +1,4 @@
-#ifndef _DOWNLOAD_H_
-#define _DOWNLOAD_H_
+#pragma once
 
 #define ON              1
 #define OFF             0
@@ -22,15 +21,11 @@
 
 #include <switch.h>
 #include <pu/Plutonium>
-#include <ui/MainApplication.hpp>
 
 
-
-//
 bool downloadFile(const char *url, const char *output, int api);
 
 std::string fetchVersion(const char *url, const char *range);
 
 std::string readVersion(std::string path);
 
-#endif

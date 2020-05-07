@@ -1,5 +1,5 @@
+#include <ui/ViewInstalledTitlesLayout.hpp>
 #include <ui/MainApplication.hpp>
-#include <vector>
 
 extern MainApplication::Ref global_app;
 
@@ -21,8 +21,12 @@ void ViewInstalledTitlesLayout::populateMenu() {
     }
     this->titlesMenu->SetSelectedIndex(0);
 }
+void ViewInstalledTitlesLayout::setInstalledTitles() {
+    //std::vector<Title> test = getInstalledTitlesNs();
+    this->titles = getInstalledTitlesNs();
+}
 
-void ViewInstalledTitlesLayout::getInstalledTitlesNs() {
+/*void ViewInstalledTitlesLayout::getInstalledTitlesNs() {
     // This function has been cobbled together from the "app_controldata" example in devkitpro.
 
     // Set the rc variable to begin with
@@ -135,7 +139,7 @@ std::string ViewInstalledTitlesLayout::formatApplicationId(u64 ApplicationId){
     strm << std::uppercase << std::hex << ApplicationId;
     return strm.str();
 }
-
+*/
 size_t ViewInstalledTitlesLayout::getTitlesCount() {
     return this->titles.size();
 }

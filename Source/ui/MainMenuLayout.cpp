@@ -1,3 +1,4 @@
+#include <ui/MainMenuLayout.hpp>
 #include <ui/MainApplication.hpp>
 
 extern MainApplication::Ref global_app;
@@ -58,7 +59,7 @@ void MainMenuLayout::deleteMenuItem_Click() {
 }
 
 void MainMenuLayout::viewInstalledMenuItem_Click() {
-    global_app->getViewInstalledTitlesLayout()->getInstalledTitlesNs();
+    global_app->getViewInstalledTitlesLayout()->setInstalledTitles();
     
     if(global_app->getViewInstalledTitlesLayout()->getTitlesCount() == 0) {
         global_app->CreateShowDialog("No titles found.", "", {"Ok"}, false);

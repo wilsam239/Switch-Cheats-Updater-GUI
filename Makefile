@@ -37,9 +37,9 @@ APP_VERSION := 0.0.2
 
 TARGET		:=	$(notdir $(CURDIR))
 BUILD		:=	build
-SOURCES		:=	Source Source/ui
+SOURCES		:=	Source Source/ui Source/titles
 DATA		:=	data
-INCLUDES	:=	include Include 
+INCLUDES	:=	include Include/ui Include/titles
 #ROMFS	:=	romfs
 
 #---------------------------------------------------------------------------------
@@ -65,7 +65,7 @@ LIBS	:= -lcurl -lz -lmbedtls -lmbedx509 -lmbedcrypto -lstdc++fs -lpu -lfreetype 
 #---------------------------------------------------------------------------------
 
 # IMPORTANT! Change "$(CURDIR)/../Plutonium/Output" to the path in which you have Plutonium libs.
-LIBDIRS	:= $(PORTLIBS) $(LIBNX) $(CURDIR)/libs/Plutonium/Plutonium/Output $(CURDIR)/libs/minzip/
+LIBDIRS	:= $(PORTLIBS) $(LIBNX) $(CURDIR)/libs/Plutonium/Plutonium/Output $(CURDIR)/libs/minizip/
 
 
 #---------------------------------------------------------------------------------

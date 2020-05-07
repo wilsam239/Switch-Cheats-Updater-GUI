@@ -1,4 +1,4 @@
-#include "titles/extract.hpp"
+/*#include "titles/extract.hpp"
 
 std::vector<std::string> getInstalledTitles(std::vector<NcmStorageId> storageId){
     std::vector<std::string> titles;
@@ -305,4 +305,4 @@ int removeCheats(bool sxos){
         }
     }
     return c;
-}
+}*/

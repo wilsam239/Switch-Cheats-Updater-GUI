@@ -1,5 +1,6 @@
 
 #include "download.hpp"
+#include <ui/MainApplication.hpp>
 
 #define API_AGENT           "HamletDuFromage"
 #define _1MiB   0x100000

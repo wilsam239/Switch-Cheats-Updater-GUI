@@ -1,5 +1,7 @@
-#include <pu/Plutonium>
+#pragma once
+
 #include <download.hpp>
+#include <pu/Plutonium>
 
 #define RELEASE_URL "https://github.com/HamletDuFromage/switch-cheats-db/releases/tag/v1.0"
 #define ARCHIVE_URL "https://github.com/HamletDuFromage/switch-cheats-db/releases/download/v1.0/"

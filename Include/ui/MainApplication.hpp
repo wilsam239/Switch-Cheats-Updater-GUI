@@ -1,12 +1,10 @@
-
 #pragma once
 
 // Include Plutonium's main header
 #include <pu/Plutonium>
+#include <ui/MainMenuLayout.hpp>
 #include <ui/ViewInstalledTitlesLayout.hpp>
 #include <ui/DownloadCheatsLayout.hpp>
-#include <ui/MainMenuLayout.hpp>
-#include <titles/titles.hpp>
 #include <sstream>
 
 #define focus      pu::ui::Color::FromHex("#6E6E72")
@@ -16,9 +14,12 @@
 #define whiteText  pu::ui::Color::FromHex("#FFFFFF")
 #define blueText   pu::ui::Color::FromHex("#38B38C")
 
+class DownloadCheatsLayout;
+class ViewInstalledTitlesLayout;
+class MainMenuLayoyut;
+
 // Define your application (can't instantiate base class, so need to make a derived one)
-class MainApplication : public pu::ui::Application
-{
+class MainApplication : public pu::ui::Application {
     public:
         using Application::Application;
         PU_SMART_CTOR(MainApplication)

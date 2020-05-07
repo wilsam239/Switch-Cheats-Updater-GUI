@@ -1,3 +1,5 @@
+#pragma once
+
 #include <pu/Plutonium>
 
 class MainMenuLayout : public pu::ui::Layout {
