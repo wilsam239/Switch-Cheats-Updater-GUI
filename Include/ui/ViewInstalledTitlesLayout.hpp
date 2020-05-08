@@ -11,8 +11,6 @@ class ViewInstalledTitlesLayout : public pu::ui::Layout {
         void setInstalledTitles();
         void clearTitles();
         void titleMenuItem_Click();
-        //void getInstalledTitlesNs();
-        //std::string formatApplicationId(u64 ApplicationId);
         size_t getTitlesCount();
         
     private:
