@@ -25,6 +25,10 @@ void outputUpdatedTitles();
 
 void printTitles(std::vector<Title> titles);
 
-std::vector<Title> getInstalledTitlesNs();
+std::vector<Title> getInstalledTitles();
 
 std::string formatApplicationId(u64 ApplicationId);
+
+NacpStruct *TryGetNACP(u64 id);
+
+std::string GetNACPName(NacpStruct *NACP);

@@ -62,6 +62,7 @@ void MainApplication::customInput(u64 down, u64 up, u64 held) {
 void MainApplication::testInput(u64 down, u64 up, u64 held) {
 
     if(down & KEY_B) {
+        this->getViewInstalledTitlesLayout()->clearTitles();
         this->ReturnToMainMenu();
     }
 

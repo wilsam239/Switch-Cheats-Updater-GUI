@@ -9,6 +9,8 @@ class ViewInstalledTitlesLayout : public pu::ui::Layout {
         PU_SMART_CTOR(ViewInstalledTitlesLayout);
         void populateMenu();
         void setInstalledTitles();
+        void clearTitles();
+        void titleMenuItem_Click();
         //void getInstalledTitlesNs();
         //std::string formatApplicationId(u64 ApplicationId);
         size_t getTitlesCount();

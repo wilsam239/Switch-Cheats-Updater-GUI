@@ -12,20 +12,30 @@ ViewInstalledTitlesLayout::ViewInstalledTitlesLayout() : Layout::Layout() {
     this->Add(titlesMenu);
 }
 
+void ViewInstalledTitlesLayout::titleMenuItem_Click() {
+    Title sel = this->titles[this->titlesMenu->GetSelectedIndex()];
+    global_app->CreateShowDialog(sel.name, formatApplicationId(sel.id), {"Close"}, false);
+}
+
 void ViewInstalledTitlesLayout::populateMenu() {
     for(int i = 0; i < this->titles.size(); i++) {
-        global_app->CreateShowDialog(this->titles.at(i).name, this->titles.at(i).id, {"Ok"}, false);
+        //global_app->CreateShowDialog(this->titles.at(i).name, formatApplicationId(this->titles.at(i).id), {"Ok"}, false);
         auto titleMenuItem = pu::ui::elm::MenuItem::New(this->titles.at(i).name);
         titleMenuItem->SetColor(whiteText);
+        titleMenuItem->AddOnClick(std::bind(&ViewInstalledTitlesLayout::titleMenuItem_Click, this));
         this->titlesMenu->AddItem(titleMenuItem);
     }
     this->titlesMenu->SetSelectedIndex(0);
 }
 void ViewInstalledTitlesLayout::setInstalledTitles() {
     //std::vector<Title> test = getInstalledTitlesNs();
-    this->titles = getInstalledTitlesNs();
+    this->titles = getInstalledTitles();
 }
 
+void ViewInstalledTitlesLayout::clearTitles() {
+    this->titles.clear();
+    this->titlesMenu->ClearItems();
+}
 /*void ViewInstalledTitlesLayout::getInstalledTitlesNs() {
     // This function has been cobbled together from the "app_controldata" example in devkitpro.
 

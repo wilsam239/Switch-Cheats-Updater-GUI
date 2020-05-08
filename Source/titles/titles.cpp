@@ -38,7 +38,7 @@ std::vector<Title> readTitlesFromFile() {
         while(getline(updatedTitlesFile, line)) {
             id = line.substr(0, 16);
             name = line.substr(17, line.size());
-            titles.push_back({id, name});
+            //titles.push_back({id, name});
         }
         updatedTitlesFile.close();
     }
@@ -73,120 +73,90 @@ void printTitles(std::vector<Title> titles) {
     }
 }
 
-std::vector<Title> getInstalledTitlesNs() {
-    // This function has been cobbled together from the "app_controldata" example in devkitpro.
-
-    // Set the rc variable to begin with
-    Result rc = 0;
+std::vector<Title> getInstalledTitles() {
     std::stringstream err;
-    // Initialise a vector of tuples, storing the title ID and the title name.
     std::vector<Title> titles;
+    NcmContentMetaDatabase metadb;
+    Result rc = ncmOpenContentMetaDatabase(&metadb, static_cast<NcmStorageId>(5));
+    if(R_SUCCEEDED(rc)) {
+        NcmContentMetaKey *recs = new NcmContentMetaKey[MaxTitleCount]();
+        s32 wrt = 0;
+        s32 total = 0;
+        rc = ncmContentMetaDatabaseList(&metadb, &total, &wrt, recs, MaxTitleCount, static_cast<NcmContentMetaType>(0), 0, 0, UINT64_MAX, NcmContentInstallType_Full);
+        
+        err << "Total returned: " << total;
+        global_app->debugDialog(err.str());
+        err.str(std::string());
 
-    // Initialise an application record array, where the size is MaxTitleCount
-    NsApplicationRecord *recs = new NsApplicationRecord[MaxTitleCount]();
+        err << "wrt returned: " << wrt;
+        global_app->debugDialog(err.str());
+        err.str(std::string());
 
-    // Set the buffer to NULL
-    NsApplicationControlData *buf=NULL;
-    // Set outsize to 0
-    u64 outsize=0;
-    // Set the language entry to NULL
-    NacpLanguageEntry *langentry = NULL;
-
-    // Create a char array to store the name of the title
-    char name[0x201];
-
-    // Set the total records to 0
-    s32 total = 0;
-    // Set a failed counter to 0
-    int totalFailed = 0;
-    // Fill the recs array with application records
-    rc = nsListApplicationRecord(recs, MaxTitleCount, 0, &total);
-    err << "Total records: " << total;
-    global_app->debugDialog(err);
-    err.str(std::string());
-    // If filling the recs array was successful
-    if (R_SUCCEEDED(rc)){
-        // Loop through records
-        for (s32 i = 0; i < total; i++){
-
-            // Reset varaibles for accessing memory
-            outsize=0;
-            buf = (NsApplicationControlData*)malloc(sizeof(NsApplicationControlData));
-            if (buf==NULL) {
-                rc = MAKERESULT(Module_Libnx, LibnxError_OutOfMemory);
-                err << "Failed to alloc mem.";
-                global_app->debugDialog(err);
-                err.str(std::string());
-            } else {
-                memset(buf, 0, sizeof(NsApplicationControlData));
-            }
-
-            if (R_SUCCEEDED(rc)) {
-                rc = nsInitialize();
-                if (R_FAILED(rc)) {
-                    err << "nsInitialize() failed: 0x" << std::hex << rc;
-                    global_app->debugDialog(err);
+        if((R_SUCCEEDED(rc)) && (wrt > 0)) {
+            titles.reserve(wrt);
+            for(s32 i = 0; i < wrt; i++) {
+                Title t = {};
+                t.id = recs[i].id;
+                NacpStruct *nacp = TryGetNACP(t.id);
+                if(nacp != NULL) {
+                    t.name = GetNACPName(nacp);
+                    err << "Name: " << t.name;
+                    global_app->debugDialog(err.str());
                     err.str(std::string());
+                    delete nacp;
                 }
+                //t.Type = static_cast<ncm::ContentMetaType>(recs[i].type);
+                t.Version = recs[i].version;
+                //t.Location = Location;
+                memcpy(&t.Record, &recs[i], sizeof(NcmContentMetaKey));
+                titles.push_back(t);
             }
-            
-            // Get the application control data for the current record
-            rc = nsGetApplicationControlData(NsApplicationControlSource_Storage, recs[i].application_id, buf, sizeof(NsApplicationControlData), &outsize);
-
-            if (R_FAILED(rc)) {
-                totalFailed++;
-                err << "nsGetApplicationControlData() failed: 0x" << std::hex << rc << " for Title ID: " << formatApplicationId(recs[i].application_id);
-                global_app->debugDialog(err);
-                err.str(std::string());
-            }
-
-            if (outsize < sizeof(buf->nacp)) {
-                rc = -1;
-                err << "Outsize is too small: 0x" << std::hex << outsize;
-                global_app->debugDialog(err);
-                err.str(std::string());
-            }
-
-            // If application control data was retrieved successfully
-            if (R_SUCCEEDED(rc)) {
-                rc = nacpGetLanguageEntry(&buf->nacp, &langentry);
-
-                if (R_FAILED(rc) || langentry==NULL) {
-                    err << "Failed to load LanguageEntry";
-                    global_app->debugDialog(err);
-                    err.str(std::string());
-                }
-            }
-
-            // If nacp language entry was retrieved successfully
-            if (R_SUCCEEDED(rc)) {
-                memset(name, 0, sizeof(name));
-                strncpy(name, langentry->name, sizeof(name)-1); //Don't assume the nacp string is NUL-terminated for safety.
-                titles.push_back({formatApplicationId(recs[i].application_id), name});
-            }
-
-            nsExit();
         }
+        delete[] recs;
+        serviceClose(&metadb.s);
     } else {
-        err << "Initial nsListApp failed";
-        global_app->debugDialog(err);
-        err.str(std::string());
+        global_app->debugDialog("ncmOpenContentMetaDatabase failed to return success.");
+        for(int i = 0; i < 5; i++) {
+            Title t = {};
+            t.id = i;
+            t.name = "Test";
+            t.Version = 1;
+            titles.push_back(t);
+        }
     }
-
-    free(buf);
-    delete[] recs;
-    std::sort(titles.begin(), titles.end());
-    if(totalFailed > 0)  {
-        err << "Failed " << totalFailed << " titles";
-        global_app->debugDialog(err);
-        err.str(std::string());
-    }
-
     return titles;
 }
 
-std::string formatApplicationId(u64 ApplicationId){
+std::string formatApplicationId(u64 ApplicationId) {
     std::stringstream strm;
     strm << std::uppercase << std::hex << ApplicationId;
     return strm.str();
+}
+
+NacpStruct *TryGetNACP(u64 id) {
+    NacpStruct *nacp = NULL;
+    NsApplicationControlData *ctdata = new NsApplicationControlData;
+    size_t acsz = 0;
+    Result rc = nsGetApplicationControlData(NsApplicationControlSource_Storage, id, ctdata, sizeof(NsApplicationControlData), &acsz);
+    if((R_SUCCEEDED(rc)) && !(acsz < sizeof(ctdata->nacp))) {
+        nacp = new NacpStruct();
+        memcpy(nacp, &ctdata->nacp, sizeof(NacpStruct));
+    } else {
+        rc = nsGetApplicationControlData(NsApplicationControlSource_Storage, id, ctdata, sizeof(NsApplicationControlData), &acsz);
+        if((R_SUCCEEDED(rc)) && !(acsz < sizeof(ctdata->nacp)))
+        {
+            nacp = new NacpStruct();
+            memcpy(nacp, &ctdata->nacp, sizeof(NacpStruct));
+        }
+    }
+    delete ctdata;
+    return nacp;
+}
+
+std::string GetNACPName(NacpStruct *NACP) {
+    NacpLanguageEntry *lent;
+    nacpGetLanguageEntry(NACP, &lent);
+    std::string ret;
+    if(lent != NULL) ret = std::string(lent->name);
+    return ret;
 }
