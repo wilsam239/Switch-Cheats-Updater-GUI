@@ -1,4 +1,9 @@
 # Switch Cheats Updater GUI
+<p align="center">
+<img src = "https://raw.githubusercontent.com/wilsam239/Switch-Cheats-Updater-GUI/master/icon.jpg"\><br>
+<img src = "https://user-images.githubusercontent.com/11286118/81375217-60705680-9144-11ea-9429-8c517b998488.PNG" height="240"\>
+<img src = "https://user-images.githubusercontent.com/11286118/81375240-6ebe7280-9144-11ea-8a34-11366cbd5404.PNG" height="240"\><br>
+</p>
 A GUI version of my fork of the Switch Cheats Updater homebrew application.
 
 This app makes use of XorTroll's Plutonium library for developing switch homebrew GUI's.
