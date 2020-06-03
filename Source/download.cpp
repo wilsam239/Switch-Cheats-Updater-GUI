@@ -47,8 +47,11 @@ int download_progress(void *p, double dltotal, double dlnow, double ultotal, dou
 
     if (counter == 0 || counter == 2 || counter == 4 || counter == 6 || counter == 8)
     {
-        printf("*** DOWNLOADING: %.2fMB of %.2fMB ***\r", dlnow / _1MiB, dltotal / _1MiB);
-        consoleUpdate(NULL);
+        
+        std::stringstream p;
+        p << "Downloading: " << dlnow / _1MiB << "MB of " << dltotal / _1MiB << "MB";
+        double amount = (dlnow / _1MiB) / (dltotal / _1MiB);
+        global_app->getDownloadCheatsLayout()->updateProgress(p.str(), amount);
     }
 
     return 0;
@@ -62,7 +65,7 @@ bool downloadFile(const char *url, const char *output, int api)
         FILE *fp = fopen(output, "wb");
         if (fp)
         {
-            printf("\n");
+            //printf("\n");
 
             ntwrk_struct_t chunk = {0};
             chunk.data = static_cast<u_int8_t *>(malloc(_1MiB));
@@ -99,13 +102,13 @@ bool downloadFile(const char *url, const char *output, int api)
 
             if (res == CURLE_OK)
             {
-                std::cout << std::endl;
-                consoleUpdate(NULL);
+                // std::cout << std::endl;
+                // consoleUpdate(NULL);
                 return true;
             }
         }
     }
-    consoleUpdate(NULL);
+    //consoleUpdate(NULL);
     return false;
 }
 

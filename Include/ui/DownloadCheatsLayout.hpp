@@ -17,10 +17,13 @@ class DownloadCheatsLayout : public pu::ui::Layout {
         PU_SMART_CTOR(DownloadCheatsLayout);
 
         int versionUpToDate();
-
+        bool isServiceRunning(const char *serviceName);
+        void downloadFileCall();
+        void updateProgress(std::string progress, double amount);
     private:
 
         // An easy way to keep objects is to have them as private members
         // Using ::Ref (of a Plutonium built-in object or any class having PU_SMART_CTOR) is an alias to a shared_ptr of the instance.
-        pu::ui::elm::TextBlock::Ref helloText;
+        pu::ui::elm::TextBlock::Ref downloadText;
+        pu::ui::elm::ProgressBar::Ref downloadProgress;
 };

@@ -35,6 +35,7 @@ void MainMenuLayout::downloadMenuItem_Click() {
         global_app->CreateShowDialog("Already up to date!", "The current cheats revision is up to date, there is nothing to be done.", {"Ok"}, false);
     } else if(upToDate == 0){
         global_app->LoadLayout(global_app->getDownloadCheatsLayout());
+        global_app->getDownloadCheatsLayout()->downloadFileCall();
     }
 }
 
