@@ -7,6 +7,8 @@ extern MainApplication::Ref global_app;
     layout->Add(this->menuBanner); \
 }
 
+
+
 void MainApplication::OnLoad() {
 
     this->menuBanner = pu::ui::elm::Image::New(10, 0, "/config/icons/MenuBanner.png");

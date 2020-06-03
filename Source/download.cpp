@@ -1,4 +1,3 @@
-
 #include "download.hpp"
 #include <ui/MainApplication.hpp>
 

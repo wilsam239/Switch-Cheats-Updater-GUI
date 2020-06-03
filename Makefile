@@ -39,7 +39,7 @@ TARGET		:=	$(notdir $(CURDIR))
 BUILD		:=	build
 SOURCES		:=	Source Source/ui Source/titles
 DATA		:=	data
-INCLUDES	:=	include Include/ui Include/titles
+INCLUDES	:=	Include Include/ui Include/titles
 #ROMFS	:=	romfs
 
 #---------------------------------------------------------------------------------

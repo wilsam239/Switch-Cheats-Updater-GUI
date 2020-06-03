@@ -1,20 +1,20 @@
 #include <ui/MainApplication.hpp>
 
-/*
+
 
 // If you would like to initialize and finalize stuff before or after Plutonium, you can use libnx's userAppInit/userAppExit
 
 extern "C" void userAppInit()
 {
-    // Initialize stuff
+    nsInitialize();
+    socketInitializeDefault();
 }
 
 extern "C" void userAppExit()
 {
-    // Cleanup/finalize stuff
+    socketExit();
+    nsExit();
 }
-
-*/
 
 // Main entrypoint
 MainApplication::Ref global_app;
